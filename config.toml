@@ -1,4 +1,4 @@
-base_url = "writeups.teddyheinen.com"
+base_url = "https://writeups.teddyheinen.com"
 compile_sass = true
 title = "CTF Writeups"
 description = "Teddy Heinen's CTF writeups"

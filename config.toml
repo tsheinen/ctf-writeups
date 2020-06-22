@@ -1,0 +1,7 @@
+base_url = "writeups.teddyheinen.com"
+compile_sass = true
+title = "CTF Writeups"
+description = "Teddy Heinen's CTF writeups"
+highlight_code = true
+highlight_theme = "monokai"
+build_search_index = true

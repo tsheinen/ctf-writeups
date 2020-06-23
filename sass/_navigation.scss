@@ -45,6 +45,9 @@
   width: 0;
 }
 
+.hidden {
+  display: none;
+}
 @include max-screen(600px) {
   .menu {
     width: 100%;

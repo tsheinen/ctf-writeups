@@ -47,6 +47,11 @@
 
 @include max-screen(600px) {
   .menu {
-    width: 0;
+    width: 100%;
+    position: relative;
+    height: auto;
+  }
+  .menu-icon {
+    display: none;
   }
 }

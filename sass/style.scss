@@ -24,14 +24,26 @@ body {
   color: $foreground-color;
 }
 
-.icon {
-  display: inline-block;
-  width: 1em;
-  height: 1em;
-  stroke-width: 0;
-  stroke: currentColor;
-  fill: currentColor;
+h1,
+h2,
+h3,
+h4,
+h5,
+p,
+ul,
+ol,
+hr,
+pre,
+code,
+footer,
+iframe,
+blockquote {
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.5;
 }
+
 
 @mixin min-screen($min-width: $body-width) {
    @media screen and (min-width: $min-width) {

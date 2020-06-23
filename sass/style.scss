@@ -44,6 +44,12 @@ blockquote {
   line-height: 1.5;
 }
 
+pre,
+code {
+  word-wrap: normal;
+  overflow-x: auto;
+}
+
 
 @mixin min-screen($min-width: $body-width) {
    @media screen and (min-width: $min-width) {

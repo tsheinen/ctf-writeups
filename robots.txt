@@ -1,0 +1,2 @@
+User-agent: *
+Sitemap: https://writeups.teddyheinen.com/sitemap.xml

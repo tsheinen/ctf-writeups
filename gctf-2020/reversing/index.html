@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+      <!-- Enable responsiveness on mobile devices-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+      <title>CTF Writeups</title>
+
+      
+      
+
+      <!-- CSS -->
+      
+      <link rel="stylesheet" href="https://writeups.teddyheinen.com/style.css">
+      
+
+      
+      
+    </head>
+
+    <body>
+        <div class="menu">
+            
+            
+            <nav role="navigation">
+                <ul>
+                    
+                        
+                        
+                            
+                            <li>
+                                
+                                <a href="https:&#x2F;&#x2F;writeups.teddyheinen.com&#x2F;auctf-2020&#x2F;">
+                                    
+                                    AUCTF 2020
+                                </a>
+                                
+                                    <ul class="hidden">
+                                        
+                                            <li >
+                                                <a href="https:&#x2F;&#x2F;writeups.teddyheinen.com&#x2F;auctf-2020&#x2F;reversing&#x2F;">
+                                                    
+                                                    Reversing
+                                                </a>
+                                            </li>
+                                        
+                                    </ul>
+                                
+                            </li>
+                        
+                            
+                            <li>
+                                
+                                <a href="https:&#x2F;&#x2F;writeups.teddyheinen.com&#x2F;gctf-2020&#x2F;">
+                                    
+                                    GCTF 2020
+                                </a>
+                                
+                                    <ul >
+                                        
+                                            <li class="active">
+                                                <a href="https:&#x2F;&#x2F;writeups.teddyheinen.com&#x2F;gctf-2020&#x2F;reversing&#x2F;">
+                                                    
+                                                    Reversing
+                                                </a>
+                                            </li>
+                                        
+                                            <li >
+                                                <a href="https:&#x2F;&#x2F;writeups.teddyheinen.com&#x2F;gctf-2020&#x2F;root-power&#x2F;">
+                                                    
+                                                    Root Power
+                                                </a>
+                                            </li>
+                                        
+                                            <li >
+                                                <a href="https:&#x2F;&#x2F;writeups.teddyheinen.com&#x2F;gctf-2020&#x2F;tracing&#x2F;">
+                                                    
+                                                    Tracing
+                                                </a>
+                                            </li>
+                                        
+                                    </ul>
+                                
+                            </li>
+                        
+                            
+                            <li>
+                                
+                                <a href="https:&#x2F;&#x2F;writeups.teddyheinen.com&#x2F;smc3&#x2F;">
+                                    
+                                    SANS SMC3
+                                </a>
+                                
+                                    <ul class="hidden">
+                                        
+                                            <li >
+                                                <a href="https:&#x2F;&#x2F;writeups.teddyheinen.com&#x2F;smc3&#x2F;binary&#x2F;">
+                                                    
+                                                    Binary
+                                                </a>
+                                            </li>
+                                        
+                                            <li >
+                                                <a href="https:&#x2F;&#x2F;writeups.teddyheinen.com&#x2F;smc3&#x2F;crypto&#x2F;">
+                                                    
+                                                    Crypto
+                                                </a>
+                                            </li>
+                                        
+                                            <li >
+                                                <a href="https:&#x2F;&#x2F;writeups.teddyheinen.com&#x2F;smc3&#x2F;web&#x2F;">
+                                                    
+                                                    Web
+                                                </a>
+                                            </li>
+                                        
+                                            <li >
+                                                <a href="https:&#x2F;&#x2F;writeups.teddyheinen.com&#x2F;smc3&#x2F;forensics&#x2F;">
+                                                    
+                                                    Forensics
+                                                </a>
+                                            </li>
+                                        
+                                            <li >
+                                                <a href="https:&#x2F;&#x2F;writeups.teddyheinen.com&#x2F;smc3&#x2F;network&#x2F;">
+                                                    
+                                                    Network
+                                                </a>
+                                            </li>
+                                        
+                                    </ul>
+                                
+                            </li>
+                        
+                    
+                </ul>
+            </nav>
+            
+            
+        </div>
+
+        <div class="page">
+            <div class="page__header">
+                <div class="menu-icon">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                
+                <span class="search-icon">🔎</span>
+                
+            </div>
+
+            <div class="page__content">
+                
+                <div class="search-container">
+                    <input id="search" type="search" placeholder="Search..">
+                    <div class="search-results">
+                        <div class="search-results__header"></div>
+                        <ul class="search-results__items"></ul>
+                    </div>
+                </div>
+                
+                <div class="book-content">
+                    
+    <h1>Reversing</h1>
+    <h1 id="beginner">beginner<a class="zola-anchor" href="#beginner" aria-label="Anchor link for: beginner">🔗</a></h1>
+<p><em>reversing, easy</em></p>
+<p><a href="https://github.com/tamucybersec/gctf-2020/tree/master/reversing/beginner">source</a></p>
+<p><a href="https://github.com/VTCAKAVSMoACE">Addison</a>, <a href="https://github.com/tcheinen">theinen</a>, <a href="https://github.com/komputerwiz">komputerwiz</a></p>
+<h2 id="initial-review">initial review<a class="zola-anchor" href="#initial-review" aria-label="Anchor link for: initial-review">🔗</a></h2>
+<p>We're provided a single binary called a.out</p>
+<pre style="background-color:#272822;">
+<code><span style="color:#f8f8f2;">❯ ./a.out
+Flag: hello
+FAILURE
+</span></code></pre>
+<p>Running it shows a flag prompt and it says &quot;FAILURE&quot; when I type hello.</p>
+<pre style="background-color:#272822;">
+<code><span style="color:#f8f8f2;">ulong </span><span style="color:#a6e22e;">main</span><span style="color:#f8f8f2;">(</span><span style="font-style:italic;color:#66d9ef;">void</span><span style="color:#f8f8f2;">)
+
+{
+  </span><span style="font-style:italic;color:#66d9ef;">int</span><span style="color:#f8f8f2;"> iVar1;
+  </span><span style="font-style:italic;color:#66d9ef;">uint</span><span style="color:#f8f8f2;"> uVar2;
+  undefined auVar3 [</span><span style="color:#ae81ff;">16</span><span style="color:#f8f8f2;">];
+  undefined local_38 [</span><span style="color:#ae81ff;">16</span><span style="color:#f8f8f2;">];
+  </span><span style="font-style:italic;color:#66d9ef;">char</span><span style="color:#f8f8f2;"> local_28 [</span><span style="color:#ae81ff;">4</span><span style="color:#f8f8f2;">];
+  
+  </span><span style="color:#66d9ef;">printf</span><span style="color:#f8f8f2;">(</span><span style="color:#e6db74;">&quot;Flag: &quot;</span><span style="color:#f8f8f2;">);
+  __isoc99_scanf(</span><span style="color:#f92672;">&amp;</span><span style="color:#f8f8f2;">DAT_0010200b,local_38);
+  auVar3 </span><span style="color:#f92672;">= </span><span style="color:#f8f8f2;">pshufb(local_38,SHUFFLE);
+  local_28 </span><span style="color:#f92672;">= </span><span style="color:#f8f8f2;">SUB164(auVar3,</span><span style="color:#ae81ff;">0</span><span style="color:#f8f8f2;">) </span><span style="color:#f92672;">+</span><span style="color:#f8f8f2;"> ADD32._0_4_ </span><span style="color:#f92672;">^ </span><span style="color:#f8f8f2;">SUB164(XOR,</span><span style="color:#ae81ff;">0</span><span style="color:#f8f8f2;">);
+  iVar1 </span><span style="color:#f92672;">= </span><span style="color:#66d9ef;">strncmp</span><span style="color:#f8f8f2;">(local_38,local_28,</span><span style="color:#ae81ff;">0x10</span><span style="color:#f8f8f2;">);
+  </span><span style="color:#f92672;">if </span><span style="color:#f8f8f2;">(iVar1 </span><span style="color:#f92672;">== </span><span style="color:#ae81ff;">0</span><span style="color:#f8f8f2;">) {
+    uVar2 </span><span style="color:#f92672;">= </span><span style="color:#66d9ef;">strncmp</span><span style="color:#f8f8f2;">(local_28,EXPECTED_PREFIX,</span><span style="color:#ae81ff;">4</span><span style="color:#f8f8f2;">);
+    </span><span style="color:#f92672;">if </span><span style="color:#f8f8f2;">(uVar2 </span><span style="color:#f92672;">== </span><span style="color:#ae81ff;">0</span><span style="color:#f8f8f2;">) {
+      </span><span style="color:#66d9ef;">puts</span><span style="color:#f8f8f2;">(</span><span style="color:#e6db74;">&quot;SUCCESS&quot;</span><span style="color:#f8f8f2;">);
+      </span><span style="color:#f92672;">goto</span><span style="color:#f8f8f2;"> LAB_00101112;
+    }
+  }
+  uVar2 </span><span style="color:#f92672;">= </span><span style="color:#ae81ff;">1</span><span style="color:#f8f8f2;">;
+  </span><span style="color:#66d9ef;">puts</span><span style="color:#f8f8f2;">(</span><span style="color:#e6db74;">&quot;FAILURE&quot;</span><span style="color:#f8f8f2;">);
+LAB_00101112:
+  </span><span style="color:#f92672;">return </span><span style="color:#f8f8f2;">(ulong)uVar2;
+}
+</span></code></pre>
+<p>The program reads 15 chars into memory and then applies 3 SIMD operations.  If the input and modified strings are the same and the modified string starts with CTF{ then it says SUCCESS.  It looks like our goal is to construct a 15 char string matching CTF{.*} that can have those operations applied to it without changing it.  The right operand of each instruction is a constant 16 byte array and they are below.<br />
+xor: <code>76 58 b4 49 8d 1a 5f 38 d4 23 f8 34 eb 86 f9 aa</code>
+add32: <code>ef be ad de ad de e1 fe 37 13 37 13 66 74 63 67</code>
+shuffle: <code>02 06 07 01 05 0b 09 0e 03 0f 04 08 0a 0c 0d 00</code></p>
+<p>The operations are as follows:</p>
+<h3 id="pshufb">pshufb<a class="zola-anchor" href="#pshufb" aria-label="Anchor link for: pshufb">🔗</a></h3>
+<p>pshufb shuffles bytes in a 128-bit register by moving them into the location specified by the second operand.</p>
+<pre style="background-color:#272822;">
+<code><span style="color:#f8f8f2;">x[16];
+y[16];
+o[16];
+
+for(int i = 0; i &lt; 16; i++) {
+  o[i] = (y[i] &lt; 0) ? 0 : x[y[i] % 16];
+}
+</span></code></pre><h3 id="paddd">paddd<a class="zola-anchor" href="#paddd" aria-label="Anchor link for: paddd">🔗</a></h3>
+<p>paddd performs four 32 bit additions and stores the output in that range of the output array</p>
+<pre style="background-color:#272822;">
+<code><span style="color:#f8f8f2;">x[128];
+y[128];
+o[128];
+
+o[0..31] = x[0..31] + y[0..31];
+o[32..63] = x[32..63] + y[32..63];
+o[64..95] = x[64..95] + y[64..95];
+o[96..127] = x[96..127] + y[96..127];
+</span></code></pre><h3 id="pxor">pxor<a class="zola-anchor" href="#pxor" aria-label="Anchor link for: pxor">🔗</a></h3>
+<p>pxor performs a bitwise xor operation across both operands.</p>
+<pre style="background-color:#272822;">
+<code><span style="color:#f8f8f2;">x[128];
+y[128];
+o[128];
+
+for(int i = 0; i &lt; 128; i++) {
+  o[i] = x[i] ^ y[i];
+}
+</span></code></pre><h2 id="solution">solution<a class="zola-anchor" href="#solution" aria-label="Anchor link for: solution">🔗</a></h2>
+<pre style="background-color:#272822;">
+<code><span style="color:#f92672;">from </span><span style="color:#f8f8f2;">binascii </span><span style="color:#f92672;">import </span><span style="color:#f8f8f2;">unhexlify
+
+
+flag </span><span style="color:#f92672;">= </span><span style="color:#f8f8f2;">[</span><span style="color:#e6db74;">&quot;_&quot; </span><span style="color:#f92672;">for </span><span style="color:#f8f8f2;">x </span><span style="color:#f92672;">in </span><span style="color:#66d9ef;">range</span><span style="color:#f8f8f2;">(</span><span style="color:#ae81ff;">16</span><span style="color:#f8f8f2;">)]
+
+known </span><span style="color:#f92672;">= </span><span style="color:#f8f8f2;">[</span><span style="color:#ae81ff;">0xe</span><span style="color:#f8f8f2;">, </span><span style="color:#ae81ff;">0xf</span><span style="color:#f8f8f2;">, </span><span style="color:#ae81ff;">0x0</span><span style="color:#f8f8f2;">, </span><span style="color:#ae81ff;">0x1</span><span style="color:#f8f8f2;">, </span><span style="color:#ae81ff;">0x2</span><span style="color:#f8f8f2;">, </span><span style="color:#ae81ff;">0x3</span><span style="color:#f8f8f2;">]
+
+
+flag[</span><span style="color:#ae81ff;">0x0</span><span style="color:#f8f8f2;">] </span><span style="color:#f92672;">= </span><span style="color:#e6db74;">&quot;C&quot;
+</span><span style="color:#f8f8f2;">flag[</span><span style="color:#ae81ff;">0x1</span><span style="color:#f8f8f2;">] </span><span style="color:#f92672;">= </span><span style="color:#e6db74;">&quot;T&quot;
+</span><span style="color:#f8f8f2;">flag[</span><span style="color:#ae81ff;">0x2</span><span style="color:#f8f8f2;">] </span><span style="color:#f92672;">= </span><span style="color:#e6db74;">&quot;F&quot;
+</span><span style="color:#f8f8f2;">flag[</span><span style="color:#ae81ff;">0x3</span><span style="color:#f8f8f2;">] </span><span style="color:#f92672;">= </span><span style="color:#e6db74;">&quot;{&quot;
+</span><span style="color:#f8f8f2;">flag[</span><span style="color:#ae81ff;">0xe</span><span style="color:#f8f8f2;">] </span><span style="color:#f92672;">= </span><span style="color:#e6db74;">&quot;}&quot;
+</span><span style="color:#f8f8f2;">flag[</span><span style="color:#ae81ff;">0xf</span><span style="color:#f8f8f2;">] </span><span style="color:#f92672;">= </span><span style="color:#e6db74;">&#39;</span><span style="color:#ae81ff;">\0</span><span style="color:#e6db74;">&#39;
+
+</span><span style="color:#f8f8f2;">xor </span><span style="color:#f92672;">= </span><span style="color:#f8f8f2;">unhexlify(</span><span style="color:#e6db74;">&quot;76 58 b4 49 8d 1a 5f 38 d4 23 f8 34 eb 86 f9 aa&quot;</span><span style="color:#f8f8f2;">.replace(</span><span style="color:#e6db74;">&quot; &quot;</span><span style="color:#f8f8f2;">,</span><span style="color:#e6db74;">&quot;&quot;</span><span style="color:#f8f8f2;">))
+add32 </span><span style="color:#f92672;">= </span><span style="color:#f8f8f2;">unhexlify(</span><span style="color:#e6db74;">&quot;ef be ad de ad de e1 fe 37 13 37 13 66 74 63 67&quot;</span><span style="color:#f8f8f2;">.replace(</span><span style="color:#e6db74;">&quot; &quot;</span><span style="color:#f8f8f2;">,</span><span style="color:#e6db74;">&quot;&quot;</span><span style="color:#f8f8f2;">))
+shuffle </span><span style="color:#f92672;">= </span><span style="color:#f8f8f2;">unhexlify(</span><span style="color:#e6db74;">&quot;02 06 07 01 05 0b 09 0e 03 0f 04 08 0a 0c 0d 00&quot;</span><span style="color:#f8f8f2;">.replace(</span><span style="color:#e6db74;">&quot; &quot;</span><span style="color:#f8f8f2;">,</span><span style="color:#e6db74;">&quot;&quot;</span><span style="color:#f8f8f2;">))
+
+
+</span><span style="font-style:italic;color:#f92672;">def </span><span style="color:#a6e22e;">reverse</span><span style="color:#f8f8f2;">(</span><span style="font-style:italic;color:#fd971f;">index</span><span style="color:#f8f8f2;">):
+	char </span><span style="color:#f92672;">= </span><span style="color:#66d9ef;">ord</span><span style="color:#f8f8f2;">(flag[index])
+	</span><span style="color:#f92672;">for </span><span style="color:#f8f8f2;">i </span><span style="color:#f92672;">in </span><span style="color:#66d9ef;">range</span><span style="color:#f8f8f2;">(</span><span style="color:#ae81ff;">256</span><span style="color:#f8f8f2;">):
+		</span><span style="color:#f92672;">if </span><span style="color:#f8f8f2;">((i </span><span style="color:#f92672;">+ </span><span style="color:#f8f8f2;">add32[index]) </span><span style="color:#f92672;">% </span><span style="color:#ae81ff;">256</span><span style="color:#f8f8f2;">) </span><span style="color:#f92672;">^ </span><span style="color:#f8f8f2;">xor[index] </span><span style="color:#f92672;">== </span><span style="color:#f8f8f2;">char:
+			 </span><span style="color:#f92672;">return </span><span style="color:#66d9ef;">chr</span><span style="color:#f8f8f2;">(i)
+
+
+</span><span style="color:#f92672;">while </span><span style="color:#66d9ef;">len</span><span style="color:#f8f8f2;">(known) </span><span style="color:#f92672;">&gt; </span><span style="color:#ae81ff;">0</span><span style="color:#f8f8f2;">:
+	curr </span><span style="color:#f92672;">= </span><span style="color:#f8f8f2;">known.pop(</span><span style="color:#ae81ff;">0</span><span style="color:#f8f8f2;">)
+	into </span><span style="color:#f92672;">= </span><span style="color:#f8f8f2;">shuffle[curr]
+	</span><span style="color:#f92672;">if </span><span style="color:#f8f8f2;">flag[into] </span><span style="color:#f92672;">!= </span><span style="color:#e6db74;">&quot;_&quot;</span><span style="color:#f8f8f2;">:
+		</span><span style="color:#f92672;">continue
+	</span><span style="color:#f8f8f2;">solved </span><span style="color:#f92672;">= </span><span style="color:#f8f8f2;">reverse(curr)
+	flag[into] </span><span style="color:#f92672;">= </span><span style="color:#f8f8f2;">solved
+	known.append(into)
+
+</span><span style="color:#66d9ef;">print</span><span style="color:#f8f8f2;">(</span><span style="color:#e6db74;">&quot;&quot;</span><span style="color:#f8f8f2;">.join(flag))
+</span></code></pre>
+<p>This was our solver script.  The careful observer (aka if you executed it) may notice that the flag it gives isn't correct.  The solved flag is <code>CTF{S1NEf0rM3!}</code> and the correct flag is <code>CTF{S1MDf0rM3!}</code>.  This happened because of a misunderstanding in how the PADDD instruction worked.  I assumed a bytewise addition across the registers, but it actually performed four 32-bit additions.  Elements 6 and 7 from the add32 array have the most significant bit flipped so they required carrying that couldn't happen on bitwise addition.</p>
+
+
+                </div>
+            </div>
+
+            <div class="prev-link">
+                
+    
+        
+        
+        <a class="previous" href="https:&#x2F;&#x2F;writeups.teddyheinen.com&#x2F;gctf-2020&#x2F;"><</a>
+    
+
+            </div>
+
+            <div class="next-link">
+                
+    
+        <a class="next" href="https:&#x2F;&#x2F;writeups.teddyheinen.com&#x2F;gctf-2020&#x2F;root-power&#x2F;">></a>
+    
+
+            </div>
+        </div>
+
+        
+            
+            <script type="text/javascript" src="https://writeups.teddyheinen.com/elasticlunr.min.js"></script>
+            <script type="text/javascript" src="https://writeups.teddyheinen.com/search_index.en.js"></script>
+            
+            <script type="text/javascript" src="https://writeups.teddyheinen.com/book.js"></script>
+        
+    </body>
+
+</html>

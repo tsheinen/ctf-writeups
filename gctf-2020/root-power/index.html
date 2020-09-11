@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+      <!-- Enable responsiveness on mobile devices-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+      <title>CTF Writeups</title>
+
+      
+      
+
+      <!-- CSS -->
+      
+      <link rel="stylesheet" href="https://writeups.teddyheinen.com/style.css">
+      
+
+      
+      
+    </head>
+
+    <body>
+        <div class="menu">
+            
+            
+            <nav role="navigation">
+                <ul>
+                    
+                        
+                        
+                            
+                            <li>
+                                
+                                <a href="https:&#x2F;&#x2F;writeups.teddyheinen.com&#x2F;auctf-2020&#x2F;">
+                                    
+                                    AUCTF 2020
+                                </a>
+                                
+                                    <ul class="hidden">
+                                        
+                                            <li >
+                                                <a href="https:&#x2F;&#x2F;writeups.teddyheinen.com&#x2F;auctf-2020&#x2F;reversing&#x2F;">
+                                                    
+                                                    Reversing
+                                                </a>
+                                            </li>
+                                        
+                                    </ul>
+                                
+                            </li>
+                        
+                            
+                            <li>
+                                
+                                <a href="https:&#x2F;&#x2F;writeups.teddyheinen.com&#x2F;gctf-2020&#x2F;">
+                                    
+                                    GCTF 2020
+                                </a>
+                                
+                                    <ul >
+                                        
+                                            <li >
+                                                <a href="https:&#x2F;&#x2F;writeups.teddyheinen.com&#x2F;gctf-2020&#x2F;reversing&#x2F;">
+                                                    
+                                                    Reversing
+                                                </a>
+                                            </li>
+                                        
+                                            <li class="active">
+                                                <a href="https:&#x2F;&#x2F;writeups.teddyheinen.com&#x2F;gctf-2020&#x2F;root-power&#x2F;">
+                                                    
+                                                    Root Power
+                                                </a>
+                                            </li>
+                                        
+                                            <li >
+                                                <a href="https:&#x2F;&#x2F;writeups.teddyheinen.com&#x2F;gctf-2020&#x2F;tracing&#x2F;">
+                                                    
+                                                    Tracing
+                                                </a>
+                                            </li>
+                                        
+                                    </ul>
+                                
+                            </li>
+                        
+                            
+                            <li>
+                                
+                                <a href="https:&#x2F;&#x2F;writeups.teddyheinen.com&#x2F;smc3&#x2F;">
+                                    
+                                    SANS SMC3
+                                </a>
+                                
+                                    <ul class="hidden">
+                                        
+                                            <li >
+                                                <a href="https:&#x2F;&#x2F;writeups.teddyheinen.com&#x2F;smc3&#x2F;binary&#x2F;">
+                                                    
+                                                    Binary
+                                                </a>
+                                            </li>
+                                        
+                                            <li >
+                                                <a href="https:&#x2F;&#x2F;writeups.teddyheinen.com&#x2F;smc3&#x2F;crypto&#x2F;">
+                                                    
+                                                    Crypto
+                                                </a>
+                                            </li>
+                                        
+                                            <li >
+                                                <a href="https:&#x2F;&#x2F;writeups.teddyheinen.com&#x2F;smc3&#x2F;web&#x2F;">
+                                                    
+                                                    Web
+                                                </a>
+                                            </li>
+                                        
+                                            <li >
+                                                <a href="https:&#x2F;&#x2F;writeups.teddyheinen.com&#x2F;smc3&#x2F;forensics&#x2F;">
+                                                    
+                                                    Forensics
+                                                </a>
+                                            </li>
+                                        
+                                            <li >
+                                                <a href="https:&#x2F;&#x2F;writeups.teddyheinen.com&#x2F;smc3&#x2F;network&#x2F;">
+                                                    
+                                                    Network
+                                                </a>
+                                            </li>
+                                        
+                                    </ul>
+                                
+                            </li>
+                        
+                    
+                </ul>
+            </nav>
+            
+            
+        </div>
+
+        <div class="page">
+            <div class="page__header">
+                <div class="menu-icon">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                
+                <span class="search-icon">🔎</span>
+                
+            </div>
+
+            <div class="page__content">
+                
+                <div class="search-container">
+                    <input id="search" type="search" placeholder="Search..">
+                    <div class="search-results">
+                        <div class="search-results__header"></div>
+                        <ul class="search-results__items"></ul>
+                    </div>
+                </div>
+                
+                <div class="book-content">
+                    
+    <h1>Root Power</h1>
+    <h1 id="root-power">Root Power<a class="zola-anchor" href="#root-power" aria-label="Anchor link for: root-power">🔗</a></h1>
+<p><a href="https://github.com/tamucybersec/gctf-2020/tree/master/reversing/root-power">source</a></p>
+<p><a href="https://storage.googleapis.com/gctf-2020-attachments-project/4905c5f476c7e7eac34bd15fbd2e61a6d6c724c8431056f57a61fb0a0a35bf4bbdcae058d9c3fc528ce306e97a42924878c36c4bc2c145548553744e630c6073">Attachment</a></p>
+<p>Root is an incredibly powerful account to access. Especially in this National Grid VM.</p>
+<h2 id="initial-review">Initial review<a class="zola-anchor" href="#initial-review" aria-label="Anchor link for: initial-review">🔗</a></h2>
+<p><a href="https://github.com/VTCAKAVSMoACE">Addison</a>, <a href="https://github.com/tcheinen">theinen</a>, <a href="https://github.com/komputerwiz">komputerwiz</a>, <a href="https://github.com/alalith">Arjun</a></p>
+<p>The attachment provided in the CTF provides us with a &quot;vm.tar.xz&quot;. Extracting reveals a disk image (disk.img) and a
+script which launches a QEMU VM using the disk image (run.sh).</p>
+<p>Let's take a look around that disk image.</p>
+<h3 id="mounting-the-image">Mounting the image<a class="zola-anchor" href="#mounting-the-image" aria-label="Anchor link for: mounting-the-image">🔗</a></h3>
+<p><a href="https://github.com/tcheinen">theinen</a></p>
+<p>With a disk image provided to us and a task to log in as root, the obvious thing is to just mount the disk and look for
+interesting stuff.  If we can't log in as root we can still look for interesting files.</p>
+<pre style="background-color:#272822;">
+<code><span style="color:#f8f8f2;">❯ fdisk -l disk.img
+Disk disk.img: 1.5 GiB, 1610612736 bytes, 3145728 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: dos
+Disk identifier: 0x415c2e94
+
+Device     Boot Start     End Sectors  Size Id Type
+disk.img1  *     2048 3145727 3143680  1.5G 83 Linux
+</span></code></pre>
+<p>The bootable partition starts at 2048 with block sizes of 512 so to mount it we need to start at 1048576.</p>
+<p><code>❯ sudo mount -o loop,offset=1048576 disk.img disk</code> will mount the partition at the &quot;disk&quot; folder in the same directory.</p>
+<h3 id="chroot-systemd-nspawn-ing-qemu-autologin">chroot, systemd-nspawn-ing,  QEMU + autologin<a class="zola-anchor" href="#chroot-systemd-nspawn-ing-qemu-autologin" aria-label="Anchor link for: chroot-systemd-nspawn-ing-qemu-autologin">🔗</a></h3>
+<p><a href="https://github.com/VTCAKAVSMoACE">Addison</a></p>
+<p>Google provides us with a script to launch it with QEMU, but it needs a password we don't have! We recognised that we
+would need a root shell on the device, so to do so, we employed multiple tools.</p>
+<p><a href="https://wiki.archlinux.org/index.php/Chroot">chroot</a>, the obvious first choice, allows us to simply log into the target's mounted folder with just <code>chroot vm</code>.
+Unfortunately, this doesn't give us <a href="https://wiki.archlinux.org/index.php/Systemd">systemd</a> or other boot-based services, so it just won't do.</p>
+<p>The next step was using <a href="https://wiki.archlinux.org/index.php/Systemd-nspawn">systemd-nspawn</a> to start the program at the systemd level. The following commands were used (in
+different shells):</p>
+<pre style="background-color:#272822;">
+<code><span style="color:#f8f8f2;">$ sudo systemd-nspawn</span><span style="font-style:italic;color:#fd971f;"> --private-network -x --image</span><span style="color:#f8f8f2;"> disk.img</span><span style="font-style:italic;color:#fd971f;"> -M</span><span style="color:#f8f8f2;"> root-power /lib/systemd/systemd
+$ sudo machinectl shell root@root-power
+</span></code></pre>
+<p>This gave us a root shell with root privileges, but ultimately we still didn't find that anything significant changed.</p>
+<p>Finally, to get root on the device in QEMU, we modified the systemd units using the <a href="https://wiki.archlinux.org/index.php/Getty#Automatic_login_to_virtual_console">standard override for getty</a>. This was the access level we used for the rest of the challenge and ended up with how we did all of our
+live investigation from here.</p>
+<h3 id="hiding-in-the-etc-shadow">Hiding in the /etc/shadow?<a class="zola-anchor" href="#hiding-in-the-etc-shadow" aria-label="Anchor link for: hiding-in-the-etc-shadow">🔗</a></h3>
+<p><a href="https://github.com/komputerwiz">komputerwiz</a></p>
+<p>The first place anyone should think to go to get root access is the &quot;shadow file&quot; in <code>/etc/shadow</code>. This file contains
+the hashed password of all users in a linux system. In this case, we can get the hashed root password:</p>
+<pre style="background-color:#272822;">
+<code><span style="color:#f8f8f2;">[root@gctf-root-power ~]# head -1 /etc/shadow
+root:$1$OesMIrMe$m3dh/8JZc6k/fz9SW2PrI.:18445::::::
+</span></code></pre>
+<p>Here is a dissection of that hash:</p>
+<ul>
+<li><code>$1</code> - MD5 algorithm (this should be easy to crack!)</li>
+<li><code>$OesMIrMe</code> - Salt</li>
+<li><code>$m3dh/8JZc6k/fz9SW2PRI.</code> - Hash</li>
+</ul>
+<p>If we put the hash line into <code>hash.txt</code>, <a href="https://hashcat.net/hashcat/">hashcat</a> makes quick work of this password against the <a href="https://wiki.skullsecurity.org/Passwords">rockyou</a> password
+list:</p>
+<pre style="background-color:#272822;">
+<code><span style="color:#f8f8f2;">sky@$ hashcat -a0 -m 500 hash.txt ~/Downloads/rockyou.txt -O 
+
+sky@$ hashcat -a0 -m 500 hash.txt ~/Downloads/rockyou.txt -O --show
+$1$OesMIrMe$m3dh/8JZc6k/fz9SW2PrI.:no
+</span></code></pre>
+<p>Turns out the hashed password is simply <code>no</code>. A feeling this seemed a bit too easy is quickly justified:</p>
+<pre style="background-color:#272822;">
+<code><span style="color:#f8f8f2;">NATIONAL POWER GRID CONTROL SERVER. ALL ACCOUNTS EXCEPT ROOT DISABLED. ADMINISTRATORS ONLY.
+gctf-root-power login: root
+Password: (&quot;no&quot;)
+NATIONAL POWER GRID CONTROL SERVER. ALL ACCOUNTS EXCEPT ROOT DISABLED. ADMINISTRATORS ONLY.
+gctf-root-power login:
+</span></code></pre>
+<p>So there is something more than just a password at play here...</p>
+<h3 id="pacman-tells-all">Pacman tells all<a class="zola-anchor" href="#pacman-tells-all" aria-label="Anchor link for: pacman-tells-all">🔗</a></h3>
+<p><a href="https://github.com/komputerwiz">komputerwiz</a></p>
+<p>Once we have a login on the system, we can use the following script to query Arch's <code>pacman</code> package manager database
+for any files that are not owned by any packages:</p>
+<pre style="background-color:#272822;">
+<code><span style="color:#75715e;">#!/bin/sh
+
+</span><span style="color:#f8f8f2;">tmp</span><span style="color:#f92672;">=</span><span style="color:#e6db74;">${TMPDIR</span><span style="color:#f92672;">-</span><span style="color:#e6db74;">/tmp}/pacman-disowned-$UID-$$
+</span><span style="color:#f8f8f2;">db</span><span style="color:#f92672;">=</span><span style="color:#e6db74;">$tmp/db
+</span><span style="color:#f8f8f2;">fs</span><span style="color:#f92672;">=</span><span style="color:#e6db74;">$tmp/fs
+
+</span><span style="color:#f8f8f2;">mkdir </span><span style="color:#e6db74;">&quot;$tmp&quot;
+</span><span style="color:#66d9ef;">trap  </span><span style="color:#e6db74;">&#39;rm -rf &quot;$tmp&quot;&#39;</span><span style="color:#f8f8f2;"> EXIT
+
+pacman</span><span style="font-style:italic;color:#fd971f;"> -Qlq </span><span style="color:#f92672;">| </span><span style="color:#f8f8f2;">sort</span><span style="font-style:italic;color:#fd971f;"> -u </span><span style="color:#f92672;">&gt; </span><span style="color:#e6db74;">&quot;$db&quot;
+
+</span><span style="color:#f8f8f2;">find /bin /etc /lib /sbin /usr \
+    !</span><span style="font-style:italic;color:#fd971f;"> -name</span><span style="color:#f8f8f2;"> lost+found \
+    </span><span style="color:#ae81ff;">\(</span><span style="font-style:italic;color:#fd971f;"> -type</span><span style="color:#f8f8f2;"> d</span><span style="font-style:italic;color:#fd971f;"> -printf </span><span style="color:#e6db74;">&#39;%p/\n&#39;</span><span style="font-style:italic;color:#fd971f;"> -o -print </span><span style="color:#ae81ff;">\) </span><span style="color:#f92672;">| </span><span style="color:#f8f8f2;">sort </span><span style="color:#f92672;">&gt; </span><span style="color:#e6db74;">&quot;$fs&quot;
+
+</span><span style="color:#f8f8f2;">comm</span><span style="font-style:italic;color:#fd971f;"> -23 </span><span style="color:#e6db74;">&quot;$fs&quot; &quot;$db&quot;</span><span style="color:#f92672;">|</span><span style="color:#f8f8f2;">less
+</span></code></pre>
+<p>(Credit to <a href="https://bbs.archlinux.org/viewtopic.php?pid=1102910#p1102910">graysky</a> on the Arch Forums)</p>
+<p>This effectively &quot;diffs&quot; the filesystem against what would otherwise be a vanilla Arch installation. This yielded many
+auto-generated / user-specified configuration files, SSL certificates, and some particularly interesting files in
+<code>/usr/</code> toward the end:</p>
+<pre style="background-color:#272822;">
+<code><span style="color:#f8f8f2;">[root@gctf-root-power ~]# ./find-extra-files.sh
+/etc/.pwd.lock
+/etc/.updated
+/etc/adjtime
+/etc/ca-certificates/extracted/ca-bundle.trust.crt
+/etc/ca-certificates/extracted/cadir/
+/etc/ca-certificates/extracted/cadir/00673b5b.0
+...
+/etc/systemd/user/sockets.target.wants/dirmngr.socket
+/etc/systemd/user/sockets.target.wants/gpg-agent-browser.socket
+/etc/systemd/user/sockets.target.wants/gpg-agent-extra.socket
+/etc/systemd/user/sockets.target.wants/gpg-agent-ssh.socket
+/etc/systemd/user/sockets.target.wants/gpg-agent.socket
+/etc/systemd/user/sockets.target.wants/p11-kit-server.socket
+/usr/lib/modules/5.6.14-arch1-1/kernel/drivers/char/chck.ko
+/usr/lib/modules/5.6.14-arch1-1/kernel/drivers/hello.ko
+/usr/lib/security/pam_chck.so
+/usr/lib/udev/hwdb.bin
+[root@gctf-root-power ~]#
+</span></code></pre>
+<p>The <code>pam_check.so</code> module was indeed being used in <code>/etc/pam.d/system-auth</code>, which is probably why our attempt to log in
+with the root password earlier would not work. Let's see what is inside the PAM module and those kernel modules.</p>
+<h2 id="ghidra-review-of-kernel-and-pam-modules">Ghidra review of kernel and PAM modules<a class="zola-anchor" href="#ghidra-review-of-kernel-and-pam-modules" aria-label="Anchor link for: ghidra-review-of-kernel-and-pam-modules">🔗</a></h2>
+<p><a href="https://github.com/VTCAKAVSMoACE">Addison</a>, <a href="https://github.com/tcheinen">theinen</a>, <a href="https://github.com/alalith">Arjun</a></p>
+<h3 id="hello-ko"><a href="https://github.com/tamucybersec/gctf-2020/blob/master/reversing/root-power/files/hello.ko">hello.ko</a><a class="zola-anchor" href="#hello-ko" aria-label="Anchor link for: hello-ko">🔗</a></h3>
+<p><a href="https://github.com/tcheinen">theinen</a></p>
+<p><img src="images/hello_ko_hello_init.png" alt="init function, prints out Hello World to kernel log" />
+<img src="images/hello_ko_hello_exit.png" alt="init function, prints out Goodbye World to kernel log" />
+<img src="images/hello_ko_strings.png" alt="strings in memory, shows Hello World! and Goodbye World!" /></p>
+<p>This was a fairly trivial kernel module. It printed &quot;Hello World&quot; and &quot;Goodbye World&quot; to the kernel log. To the best of
+my knowledge it had nothing to do with the actual challenge but it was an extra file on the disk so we analyzed it.</p>
+<h3 id="chck-ko"><a href="https://github.com/tamucybersec/gctf-2020/blob/master/reversing/root-power/files/chck.ko">chck.ko</a><a class="zola-anchor" href="#chck-ko" aria-label="Anchor link for: chck-ko">🔗</a></h3>
+<p><a href="https://github.com/VTCAKAVSMoACE">Addison</a>, <a href="https://github.com/tcheinen">theinen</a>, <a href="https://github.com/alalith">Arjun</a></p>
+<p>We run strings on the kernel module, and find that the author is someone working at Google. There is also a mention of
+acpi in the alias:</p>
+<pre style="background-color:#272822;">
+<code><span style="color:#f8f8f2;">arjun@broly:~/Playground/google_ctf/reversing/root_power/vm$ strings chck.ko
+Linux
+eH3</span><span style="color:#f92672;">&lt;</span><span style="color:#f8f8f2;">%(
+]A</span><span style="color:#ae81ff;">\A</span><span style="color:#f8f8f2;">]
+CHCK0001
+chck
+author</span><span style="color:#f92672;">=</span><span style="color:#e6db74;">Connor </span><span style="color:#f8f8f2;">Wood </span><span style="color:#f92672;">&lt;</span><span style="color:#f8f8f2;">venos@google.com</span><span style="color:#f92672;">&gt;</span><span style="color:#f8f8f2;">
+license=GPL
+srcversion</span><span style="color:#f92672;">=</span><span style="color:#e6db74;">B36F4E186ADBA29CCB7A579
+</span><span style="color:#f8f8f2;">alias</span><span style="color:#f92672;">=</span><span style="color:#e6db74;">acpi</span><span style="color:#f92672;">*</span><span style="color:#e6db74;">:CHCK0001:</span><span style="color:#f92672;">*
+</span><span style="color:#f8f8f2;">depends</span><span style="color:#f92672;">=
+</span><span style="color:#f8f8f2;">retpoline</span><span style="color:#f92672;">=</span><span style="color:#e6db74;">Y
+</span><span style="color:#f8f8f2;">name</span><span style="color:#f92672;">=</span><span style="color:#e6db74;">chck
+</span><span style="color:#f8f8f2;">...
+</span></code></pre>
+<p>We look at the kernel modules in ghidra, and we see that the read function calls a function <code>acpi_evaluate_integer</code>.
+This function is external and invokes relies on uninitialised data which is likely to be defined in initramfs:</p>
+<p><img src="images/chck_read.png" alt="chck_read" /></p>
+<h3 id="pam-chck-so"><a href="https://github.com/tamucybersec/gctf-2020/blob/master/reversing/root-power/files/pam_chck.so">pam_chck.so</a><a class="zola-anchor" href="#pam-chck-so" aria-label="Anchor link for: pam-chck-so">🔗</a></h3>
+<p><a href="https://github.com/tcheinen">theinen</a></p>
+<p><img src="images/pam_chck_so_functions.png" alt="pam_chck.so functions" /></p>
+<p>pam_chck.so has four functions, three of which are implementations of a pam interface.
+<a href="https://linux.die.net/man/3/pam_setcred">pam_setcred</a>,
+<a href="https://linux.die.net/man/3/pam_authenticate">pam_authenticate</a>, and
+<a href="https://linux.die.net/man/3/pam_acct_mgmt">pam_acct_mgmt</a>.  We know that the login prompt is seemingly ignoring the
+root password so pam_authenticate (which controls the login flow) seems like it'll be relevant.</p>
+<p><img src="images/pam_chck_so_authenticate.png" alt="pam_chck.so authenticate" /></p>
+<p>This explains the strange behavior we had noticed earlier with the login prompt. Any account which was not root would
+fail immediately by querying username again and root would fail with the correct password. It's worth noting that it
+doesn't read input for the password at all. The check_device function determines if we log in successfully or so, so the
+next place to look is that function.</p>
+<p><img src="images/pam_chck_so_check_device.png" alt="pam_chck.so check_device" /></p>
+<p>check_device reads two bytes from <code>/dev/chck</code>, converts them into an integer using atoi, and returns it. Looking back at
+pam_sm_authenticate, if <code>/dev/chck</code> returns a 1 then the login will succeed, otherwise it will fail.</p>
+<h2 id="initramfs-exploration">initramfs exploration<a class="zola-anchor" href="#initramfs-exploration" aria-label="Anchor link for: initramfs-exploration">🔗</a></h2>
+<p><a href="https://github.com/VTCAKAVSMoACE">Addison</a>, <a href="https://github.com/komputerwiz">komputerwiz</a></p>
+<p>By this point, we had worked out that it was necessary to view the initramfs in order to access the data present in the
+kernel module (specifically, <code>chck_handle</code> and the call to <code>acpi_evaluate_integer</code>). So, we extracted the initramfs.</p>
+<h3 id="unpacking-and-peeking">Unpacking and peeking<a class="zola-anchor" href="#unpacking-and-peeking" aria-label="Anchor link for: unpacking-and-peeking">🔗</a></h3>
+<p><a href="https://github.com/VTCAKAVSMoACE">Addison</a></p>
+<pre style="background-color:#272822;">
+<code><span style="color:#f8f8f2;">$ cp vm/boot/initramfs-linux.img .
+$ cpio</span><span style="font-style:italic;color:#fd971f;"> -iv </span><span style="color:#f92672;">&lt;</span><span style="color:#f8f8f2;"> initramfs-linux.img 
+kernel
+kernel/firmware
+kernel/firmware/acpi
+kernel/firmware/acpi/ssdt.aml
+3 blocks
+$ cd kernel/firmware/acpi/
+$ file ssdt.aml
+ssdt.aml: data
+</span></code></pre>
+<p>Hmm, that's unhelpful. A little google-fu shows us that this is an ACPI <a href="https://wiki.osdev.org/SSDT">Secondary System Description Table</a>,
+which is used for further providing functionality to devices with <a href="https://wiki.osdev.org/AML">ACPI Machine Language</a>. On the AML page, it
+specifically mentions:</p>
+<blockquote>
+<p>The Intel ASL assembler (iasl) is freely available on many Linux distributions and can convert in <strong>either direction</strong>
+between these formats.</p>
+</blockquote>
+<p>I run a variant of Ubuntu, so installing that was as easy as <code>sudo apt install acpica-tools</code>.</p>
+<pre style="background-color:#272822;">
+<code><span style="color:#f8f8f2;">$ iasl</span><span style="font-style:italic;color:#fd971f;"> -d</span><span style="color:#f8f8f2;"> ssdt.aml
+
+Intel ACPI Component Architecture
+ASL+ Optimizing Compiler/Disassembler version 20190509
+Copyright (c) 2000 - 2019 Intel Corporation
+
+File appears to be binary: found 167 non-ASCII characters, disassembling
+Binary file appears to be a valid ACPI table, disassembling
+Input file ssdt.aml, Length 0x1FD (509) bytes
+ACPI: SSDT 0x0000000000000000 0001FD (v02                 00000000 INTL 20190509)
+Pass 1 parse of </span><span style="color:#f92672;">[</span><span style="color:#f8f8f2;">SSDT</span><span style="color:#f92672;">]
+</span><span style="color:#f8f8f2;">Pass 2 parse of </span><span style="color:#f92672;">[</span><span style="color:#f8f8f2;">SSDT</span><span style="color:#f92672;">]
+</span><span style="color:#f8f8f2;">Parsing Deferred Opcodes (Methods/Buffers/Packages/Regions)
+
+Parsing completed
+Disassembly completed
+ASL Output:    ssdt.dsl - 4182 bytes
+</span></code></pre>
+<p>Huzzah! Now we can mess around with the .dsl file, the full content of which is available
+<a href="files/kernel/firmware/acpi">here</a>.</p>
+<h3 id="acpi-fun">ACPI fun<a class="zola-anchor" href="#acpi-fun" aria-label="Anchor link for: acpi-fun">🔗</a></h3>
+<p><a href="https://github.com/VTCAKAVSMoACE">Addison</a></p>
+<p>Upon inspecting the DSL file, we find the method used in <a href="https://writeups.teddyheinen.com/gctf-2020/root-power/#chckko">chck.ko</a> via <code>acpi_evaluate_integer</code>. It's quite
+long, so I've redacted everything except the most important bit.</p>
+<pre style="background-color:#272822;">
+<code><span style="color:#f8f8f2;">Method (CHCK, 0, NotSerialized)
+{
+    ...
+    KBDB [Local1] = Local0
+    Local1 += One
+    While ((Local0 != 0x9C))
+    {
+        WDTA ()
+        Local0 = DTAR /* \CHCK.DTAR */
+        If ((Local0 == 0x36))
+        {
+            Local0 = 0x2A
+        }
+
+        If ((Local0 == 0xB6))
+        {
+            Local0 = 0xAA
+        }
+
+        If ((Local1 &lt; 0x3E))
+        {
+            KBDB [Local1] = Local0
+            Local1 += One
+        }
+    }
+    EINT ()
+    If ((KBDA == KBDB))
+    {
+        Return (One)
+    }
+    ...
+}
+</span></code></pre>
+<p>KBDA and KBDB are buffers defined above:</p>
+<pre style="background-color:#272822;">
+<code><span style="color:#f8f8f2;">Name (KBDA, Buffer (0x3E)
+{
+    /* 0000 */  0x2A, 0x2E, 0xAE, 0x14, 0x94, 0x21, 0xA1, 0x1A,  // *....!..
+    /* 0008 */  0x9A, 0xAA, 0x1E, 0x9E, 0x2E, 0xAE, 0x19, 0x99,  // ........
+    /* 0010 */  0x17, 0x97, 0x2A, 0x0C, 0x8C, 0xAA, 0x32, 0xB2,  // ..*...2.
+    /* 0018 */  0x1E, 0x9E, 0x2E, 0xAE, 0x23, 0xA3, 0x17, 0x97,  // ....#...
+    /* 0020 */  0x31, 0xB1, 0x12, 0x92, 0x2A, 0x0C, 0x8C, 0xAA,  // 1...*...
+    /* 0028 */  0x26, 0xA6, 0x1E, 0x9E, 0x31, 0xB1, 0x22, 0xA2,  // &amp;...1.&quot;.
+    /* 0030 */  0x16, 0x96, 0x1E, 0x9E, 0x22, 0xA2, 0x12, 0x92,  // ....&quot;...
+    /* 0038 */  0x2A, 0x1B, 0x9B, 0xAA, 0x1C, 0x9C               // *.....
+})
+Name (KBDB, Buffer (0x3E){})
+</span></code></pre>
+<p>It was at this point that two things happen:</p>
+<ul>
+<li><a href="https://github.com/tcheinen">theinen</a> worked out that, when reading the device, it would only return values after hitting enter.</li>
+<li><a href="https://github.com/komputerwiz">komputerwiz</a> worked out that these are virtual keyboard events values.</li>
+</ul>
+<p>So now, we just need to decode the keyboard events into ASCII.</p>
+<h2 id="keyboard-decoding">Keyboard decoding<a class="zola-anchor" href="#keyboard-decoding" aria-label="Anchor link for: keyboard-decoding">🔗</a></h2>
+<p><a href="https://github.com/VTCAKAVSMoACE">Addison</a>, <a href="https://github.com/tcheinen">theinen</a>, <a href="https://github.com/komputerwiz">komputerwiz</a>, <a href="https://github.com/alalith">Arjun</a></p>
+<p>When pressing -- or <em>releasing</em> -- a key on a keyboard (or pressing a button on the mouse), the kernel receives these
+events in the form of &quot;key codes.&quot; The <a href="https://github.com/micmonay/keybd_event/blob/master/keybd_linux.go">keybd_event repo</a> by <a href="https://github.com/micmonay">@micmonay</a> contains a
+<a href="https://github.com/micmonay/keybd_event/blob/master/keybd_linux.go">mapping</a> that gives more meaningful names to the
+key codes. Decoding the key codes above gives the following sequence of keys:</p>
+<pre style="background-color:#272822;">
+<code><span style="color:#f8f8f2;">VK_SHIFT
+VK_C
+VK_EXIT
+VK_T
+VK_PROG1
+VK_F
+VK_EJECTCD
+VK_LEFTBRACE
+VK_CYCLEWINDOWS
+VK_ISO
+VK_A
+VK_BACK
+VK_C
+VK_EXIT
+VK_P
+NOT_FOUND
+VK_I
+VK_MSDOS
+VK_SHIFT
+VK_MINUS
+VK_CALC
+VK_ISO
+VK_M
+VK_SCROLLDOWN
+VK_A
+VK_BACK
+VK_C
+VK_EXIT
+VK_H
+VK_NEXTSONG
+VK_I
+VK_MSDOS
+VK_N
+VK_SCROLLUP
+VK_E
+VK_DELETEFILE
+VK_SHIFT
+VK_MINUS
+VK_CALC
+VK_ISO
+VK_L
+VK_STOPCD
+VK_A
+VK_BACK
+VK_N
+VK_SCROLLUP
+VK_G
+VK_EJECTCLOSECD
+VK_U
+VK_WWW
+VK_A
+VK_BACK
+VK_G
+VK_EJECTCLOSECD
+VK_E
+VK_DELETEFILE
+VK_SHIFT
+VK_RIGHTBRACE
+VK_MAIL
+VK_ISO
+VK_ENTER
+VK_BOOKMARKS
+</span></code></pre>
+<p>Wow, there is a lot of extra &quot;junk&quot; buttons being pressed. We can ignore the <code>MSDOS</code>, <code>CALC</code>, <code>NEXTSONG</code>, <code>EJECTCD</code>,
+etc. events. One pattern of note is the <code>SHIFT</code> event when the shift key is pressed down, and the corresponding <code>ISO</code>
+event when it is released. This means that the initial <code>C</code>, <code>T</code>, and <code>F</code> are capitalized, <code>LEFTBRACE</code> and <code>RIGHTBRACE</code>
+are actually curly braces (&quot;{}&quot;), and <code>MINUS</code> is actually an underscore (&quot;_&quot;). Putting all of this together yields the
+flag:</p>
+<p><code>CTF{acpi_machine_language}</code></p>
+
+
+                </div>
+            </div>
+
+            <div class="prev-link">
+                
+    
+        <a class="previous" href="https:&#x2F;&#x2F;writeups.teddyheinen.com&#x2F;gctf-2020&#x2F;reversing&#x2F;"><</a>
+    
+
+            </div>
+
+            <div class="next-link">
+                
+    
+        <a class="next" href="https:&#x2F;&#x2F;writeups.teddyheinen.com&#x2F;gctf-2020&#x2F;tracing&#x2F;">></a>
+    
+
+            </div>
+        </div>
+
+        
+            
+            <script type="text/javascript" src="https://writeups.teddyheinen.com/elasticlunr.min.js"></script>
+            <script type="text/javascript" src="https://writeups.teddyheinen.com/search_index.en.js"></script>
+            
+            <script type="text/javascript" src="https://writeups.teddyheinen.com/book.js"></script>
+        
+    </body>
+
+</html>

@@ -1,0 +1,20 @@
+name = "CSAW Quals CTF 2021"
+date = "2021-09-12"
+description = "I competed in CSAW Quals with [ret2rev](https://ret2rev.dev/).  We ended in 88th place overall and 17th in the qualifying brackets (US Students). I've included writeups for the challenges I solved and thought were interesting enough to write about. "
+
+[challenges]
+[challenges.scp-terminal]
+name = "SCP Terminal"
+tags = ["web", "browser-file-protocol"]
+
+[challenges.procrastination-simulator]
+name = "Procrastination Simulator"
+tags = ["pwn", "automatic-exploit-gen"]
+
+[challenges.haystack]
+name = "Haystack"
+tags = ["pwn", "arithmetic-underflow"]
+
+[challenges.tripping-breakers]
+name = "Tripping Breakers"
+tags = ["forensics"]

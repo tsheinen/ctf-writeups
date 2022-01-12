@@ -1,0 +1,12 @@
+name = "HTB University Quals 2021"
+date = "2021-11-22"
+description = "I played with [ret2rev](https://ret2rev.dev/) and we placed 38th! Great CTF; I appreciated the theme and the challenges were well designed. I've included writeups for the rev challenges I solved. "
+
+[challenges]
+[challenges.vault]
+name = "Vault"
+tags = ["reversing", "qiling"]
+
+[challenges.pneumatic-validator]
+name = "Pneumatic Validator"
+tags = ["reversing", "smart-brute-force"]

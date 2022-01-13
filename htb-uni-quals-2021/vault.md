@@ -1,7 +1,7 @@
 ```text
 After following a series of tips, you have arrived at your destination; a giant vault door. Water drips and steam hisses from the locking mechanism, as you examine the small display - "PLEASE SUPPLY PASSWORD". Below, a typewriter for you to input. You must study the mechanism hard - you might only have one shot...
 ```
-[vault](/htb-uni-quals-2021/vault)
+[vault](/htb-uni-quals-2021/bins/vault)
 
 # reversing
 

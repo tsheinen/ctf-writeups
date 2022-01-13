@@ -2,7 +2,7 @@
 Help! I've lost my favorite needle!
 nc pwn.chal.csaw.io 5002
 ```
-[haySTACK](/csaw-quals-2021/haySTACK)
+[haySTACK](/csaw-quals-2021/bins/haySTACK)
 
 ![](/csaw-quals-2021/haystack_function.png)
 

@@ -1,7 +1,7 @@
 ```text
 In some alternate reality, computers are not electronics-based but instead use air pressure. No electrons are zipping by and instead, a large pneumatic circuit takes care of all the math. In that world, we reverse engineers are not staring countless hours into debuggers and disassemblers but are inspecting the circuits on a valve level, trying to figure out how the particles will behave in weird components and how they are connected. Thinking about it, that doesn't sound too different, does it? 
 ```
-[pneumaticvalidator](/htb-uni-quals-2021/pneumaticvalidator)
+[pneumaticvalidator](/htb-uni-quals-2021/bins/pneumaticvalidator)
 
 # reversing
 

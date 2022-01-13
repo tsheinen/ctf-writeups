@@ -1,5 +1,3 @@
-# imports
-
 ```text
 Find the only Win API function called by the shellcode.
 ```

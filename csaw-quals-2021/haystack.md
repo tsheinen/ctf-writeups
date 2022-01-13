@@ -1,5 +1,3 @@
-## haySTACK (pwn, 290)
-
 ```text
 Help! I've lost my favorite needle!
 nc pwn.chal.csaw.io 5002

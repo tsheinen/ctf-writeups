@@ -1,5 +1,3 @@
-## scp-terminal (web, 497)
-
 ```text
 Every since you started working this administrative government job, things have gotten strange. It's not just because your day is spent cataloging an archive of anomalous objects. In your dreams you see a burning number: 31337 Maybe this terminal can help uncover the meaning of these dreams.
 ```
@@ -8,7 +6,7 @@ Every since you started working this administrative government job, things have 
 
 The Explore Archive button opens up a random SCP-wiki page and the Contain SCP button will open up the provided URL on the server and show a screenshot. It'll only work if the URL contains "scp-" so I added "?test=scp-wiki" to the end of the URL to bypass the check. 
 
-### Enumeration
+# Enumeration
 
 Using the URL "view-source:file:///server?test=scp-wiki" prints a list of all the server files. I used view-source because it wasn't rendering the file listing directly for some reason. 
 

@@ -1,11 +1,9 @@
-# vault
-
 ```text
 After following a series of tips, you have arrived at your destination; a giant vault door. Water drips and steam hisses from the locking mechanism, as you examine the small display - "PLEASE SUPPLY PASSWORD". Below, a typewriter for you to input. You must study the mechanism hard - you might only have one shot...
 ```
 [vault](/ctf/htb-uni-quals-2021/vault)
 
-## reversing
+# reversing
 
 The first place to go is the main funtion! The binary is stripped but binary ninja is kinda enough to detect and rename it automatically, so all that is left is analyzing the function. 
 
@@ -15,7 +13,7 @@ It's fairly straightforward for a stripped c++ binary. At the top it opens up an
 
 All of the functions are just there in the binary if you wanted to reverse it manually but I do not. The thing is that every byte of the flag is in memory at some point so all you need to is feed it some placeholder flag and then extract each comparison byte. 
 
-## solve
+# solve
 
 I solved it using Qiling. I provided it a fake file and hooked the comparison instruction to log the register the byte of the flag was stored in -- ecx. 
 

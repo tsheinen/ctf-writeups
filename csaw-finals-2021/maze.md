@@ -1,5 +1,3 @@
-# maze
-
 ```text
 Feel free to take a tour, but good luck finding your way out of this one!
 ```
@@ -35,7 +33,7 @@ So immediately we're looking to do a graph traversal of this to find a path of 6
 
 As it turns out there are only 64 unique nodes which makes this problem significantly harder. We're looking to find a [hamiltonian path](https://en.wikipedia.org/wiki/Hamiltonian_path) which for a directed cyclic graph (this unfortunately has many cycles) is NP-complete and a naive solution will finish approximately fucking never. Fortunately there are heuristic solutions which can be applied to solve it in a reasonable amount of time. 
 
-## lifting it into a graph
+# lifting it into a graph
 
 This ended up actually being really straightforward! The "directions" aka values of rbx & rcx are constant which means we have two values to extract for each function -- the address of the function and the address it uses as a base to compute successor functions. 
 
@@ -150,7 +148,7 @@ for k,v in adj.items():
 ```
 
 
-## solving for the hamiltonian path
+# solving for the hamiltonian path
 
 Now begins the long long search for a heuristic solution which does not segfault and will solve the problem in a reasonable time!
 

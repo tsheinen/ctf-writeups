@@ -1,12 +1,9 @@
-# pneumatic validator
-
-
 ```text
 In some alternate reality, computers are not electronics-based but instead use air pressure. No electrons are zipping by and instead, a large pneumatic circuit takes care of all the math. In that world, we reverse engineers are not staring countless hours into debuggers and disassemblers but are inspecting the circuits on a valve level, trying to figure out how the particles will behave in weird components and how they are connected. Thinking about it, that doesn't sound too different, does it? 
 ```
 [pneumaticvalidator](/ctf/htb-uni-quals-2021/pneumaticvalidator)
 
-## reversing
+# reversing
 
 ```c
 undefined8 main(int argc,char **argv)
@@ -59,7 +56,7 @@ It takes a flag provided in argv[1] and asserts the length is 20. It'll run a fe
 
 Ah, yes, I can actually just do that lmao. ✨ dynamic analysis ✨. 
 
-## solve
+# solve
 
 ```python
 from subprocess import run, PIPE

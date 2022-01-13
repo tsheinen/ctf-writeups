@@ -2,20 +2,20 @@
 glootie has made an app which is super-safe! no one in the J19-Zeta-7 universe can crack the password!
 ```
 
-[app-debug.apk](/ctf/csaw-finals-2021/app-debug.apk)
+[app-debug.apk](/csaw-finals-2021/app-debug.apk)
 
 
 Hmm Android reversing; gonna use the lovely [jadx-gui](https://github.com/skylot/jadx)
 
-![checkPassword is native fuck](/ctf/csaw-finals-2021/glootie_native_func.png)
+![checkPassword is native fuck](/csaw-finals-2021/glootie_native_func.png)
 
 Well ok I'll grab the native libs and reverse that. 
 
-![shaders in assets](/ctf/csaw-finals-2021/glootie_assets_shaders.png)
+![shaders in assets](/csaw-finals-2021/glootie_assets_shaders.png)
 
 Oops, fear. Well, let's look at the checkPassword function anyway. 
 
-![](/ctf/csaw-finals-2021/glootie_checkPasswd_decomp.png)
+![](/csaw-finals-2021/glootie_checkPasswd_decomp.png)
 
 So looks like we load the shader, send it the password, and then assert that the return value is [0, 1, 2, 3, 4,...]. Looks like we aren't getting out of reversing the shader. 
 

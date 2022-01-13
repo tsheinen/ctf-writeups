@@ -2,7 +2,7 @@
 Feel free to take a tour, but good luck finding your way out of this one!
 ```
 
-[maze_public](/ctf/csaw-finals-2021/maze_public)
+[maze_public](/csaw-finals-2021/maze_public)
 
 To start with we have a stripped binary and a server running that binary; we get the flag if we make it validate. 
 
@@ -15,11 +15,11 @@ Try again!
 
 Looks like we're trying to find the input which makes it not say "Try again!"? Let's open it up and see how it makes that decision!
 
-![disassembled _start function](/ctf/csaw-finals-2021/maze_start_disas.png)
+![disassembled _start function](/csaw-finals-2021/maze_start_disas.png)
 
 Ah syscalls, lovely -- we read in some input and pass it to `sub_403eb6`. If the return value is 64 we get the flag. 
 
-![disassembled sub_403eb6](/ctf/csaw-finals-2021/maze_first_graph_function.png)
+![disassembled sub_403eb6](/csaw-finals-2021/maze_first_graph_function.png)
 
 This is real gnarly. You can't see the bottom of the function in that picture but here is a summary. 
 

@@ -191,4 +191,4 @@ def main():
 if __name__ == "__main__":
     main()
 ```
-![](/ctf/csaw-quals-2021/aeg_flag.png)
+![](/csaw-quals-2021/aeg_flag.png)

@@ -1,0 +1,7 @@
+name = "Battelle Winter CTF 2022"
+date = "2022-01-07"
+
+[challenges]
+[challenges.holy_grail_of_rop]
+name = "Holy Grail of ROP"
+tags = ["pwn", "automatic-exploit-gen"]

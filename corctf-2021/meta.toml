@@ -1,0 +1,33 @@
+name = "corCTF 2021"
+date = "2021-08-22"
+description = "I competed with ret2rev and placed in 98th place!  I wrote these all in the last 20 minutes of the ctf and went to go get food so it's a little brief. "
+
+[challenges]
+
+[challenges.fibinary]
+name = "fibinary"
+tags = ["crypto"]
+
+[challenges.4096]
+name = "4096"
+tags = ["crypto"]
+
+[challenges.chainblock]
+name = "chainblock"
+tags = ["pwn"]
+
+[challenges.cshell]
+name = "cshell"
+tags = ["pwn"]
+
+[challenges.yeetcode]
+name = "yeetcode"
+tags = ["sandbox-escape"]
+
+[challenges.devme]
+name = "devme"
+tags = ["web", "graphql"]
+
+[challenges.drinkme]
+name = "drinkme"
+tags = ["web"]

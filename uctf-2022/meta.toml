@@ -1,0 +1,16 @@
+name = "UTCTF 2022"
+date = "2022-03-13"
+description = "I competed with the Texas A&M Cyber Club; placing in 23rd place."
+
+[challenges]
+[challenges.smol]
+name = "Smol Overflow"
+tags = ["pwn"]
+
+[challenges.bloat]
+name = "Bloat"
+tags = ["pwn", "kernel"]
+
+[challenges.aeg]
+name = "Automatic Exploit Generation 2"
+tags = ["pwn", "automatic-exploit-gen"]

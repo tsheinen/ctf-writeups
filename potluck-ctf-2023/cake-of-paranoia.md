@@ -224,7 +224,6 @@ Capabilities are more or less uninteresting -- default and nothing that can be l
 
 Following up on that shows that we have write access to root's .ssh directory, sshd is running on the host, and the host and docker container are networked together.  After fighting for a long time with the IO, I managed to get dropbear on inside the container and confirmed I could ssh up a level.
 
-00000000fdecbfff
 ```
 > cat /proc/self/status | grep CapEff
 CapEff: 00000000fdecbfff

@@ -1,4 +1,3 @@
-# Time Jump Planner at Shmoocon 2024
 Time Jump Planner was a pwn challenge written by [playoff-rondo](https://ctftime.org/user/3509) for Battelle's Shmoocon CTF.  I solved first :)
 
 tl;dr

@@ -1,0 +1,7 @@
+name = "Battelle @ Shmoocon 2024"
+date = "2024-01-13"
+
+[challenges]
+[challenges.time_jump_planner]
+name = "Time Jump Planner"
+tags = ["pwn", "got-oriented-programming", "shadow-stack"]

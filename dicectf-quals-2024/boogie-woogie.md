@@ -1,8 +1,3 @@
-+++
-title = "boogie-woogie"
-date = 2024-02-10
-+++
-
 ## code overview
 
 boogie-woogie is a fairly simple program 

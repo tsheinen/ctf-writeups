@@ -1,0 +1,8 @@
+name = "DiceCTF 2024 Quals"
+date = "2024-02-10"
+desc = "I played with [idek](https://ctftime.org/team/157039) and we placed 4th.  I had loads of fun, see y'all in NYC :)"
+
+[challenges]
+[challenges.boogie-woogie]
+name = "boogie-woogie"
+tags = ["pwn", "smart-brute-force"]

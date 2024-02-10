@@ -72,7 +72,7 @@ Simple in this case means that it's easy to understand and very difficult to sol
 tl;dr its just a uuid lol
 <br>
 
-it is used to filter atexit functions when an object is unloaded and is a pointer because that is inherently unique to a given section
+it is initialized at runtime to a recursive pointer (PIE + 0xf008) and is used to filter which atexit functions run when an object is unloaded.  It is a pointer because it is implicitly unique but it is never dereferenced. 
 
 
 </blockquote>

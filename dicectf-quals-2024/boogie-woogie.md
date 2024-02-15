@@ -1,3 +1,4 @@
+
 ## code overview
 
 boogie-woogie is a fairly simple program 
@@ -72,8 +73,7 @@ Simple in this case means that it's easy to understand and very difficult to sol
 tl;dr its just a uuid lol
 <br>
 
-it is initialized at runtime to a recursive pointer (PIE + 0xf008) and is used to filter which atexit functions run when an object is unloaded.  It is a pointer because it is implicitly unique but it is never dereferenced. 
-
+it is initialized at runtime to a recursive pointer (PIE + 0xf008) and is used to filter which atexit functions run when an object is unloaded. It is a pointer because it is implicitly unique but it is never dereferenced.
 
 </blockquote>
 
@@ -157,7 +157,9 @@ unsigned long randomize_page(unsigned long start, unsigned long range)
 
 ```
 
-To be quite honest this is enough on it's own.  A 1-in-8192 brute isn't exactly fast but frankly I've done stupider things for a flag than a three hour brute (sry not sry infra; someone actually took it down doing this and got a POW added).  In the end though there was a pretty easy optimization that could cut that down to merely a couple hundred throws.  The heap is (in this program, at the current state) 33 pages long and all we need to do is land somewhere inside the heap.   Once we know a valid heap offset, we can walk back until the  tcache perthread header is found -- bringing an 1/8192 chance down to 1/250-ish. 
+To be quite honest this is enough on it's own.  A 1-in-8192 brute isn't exactly fast but frankly I've done stupider things for a flag than a three hour brute (sry not sry infra; someone actually took it down doing this and got a POW added).  
+
+In the end though there was a pretty easy optimization that could cut that down to merely a couple hundred throws.  The heap is (in this program, at the current state) 33 pages long and all we need to do is land somewhere inside the heap.   Once we know a valid heap offset, we can walk back until the  tcache perthread header is found -- bringing an 1/8192 chance down to 1/250-ish. 
 
 
 ```python
@@ -252,9 +254,6 @@ if __name__ == "__main__":
     main()
 ```
 
-
-
-
 ## manifesting a libc pointer in the heap
 
 So, what now?
@@ -299,23 +298,137 @@ p->bk = bck;
 
 Unfortunately, in this case we don't have much ability to work with the heap in this binary.  There is (as far as I'm aware) a single relevant primitive -- scanf [allocates a scratch buffer](https://elixir.bootlin.com/glibc/glibc-2.35/source/stdio-common/vfscanf-internal.c#L336) and then frees it at the end.  However, the lifetime of this chunk (allocated, used, freed) usually just means it gets consolidated against the predecessor chunk (top chunk in this case). 
 
-So, then, how can we prevent this consolidation?  Well, there is an uncommon case where a call to malloc can free a chunk during operation -- whenever the top chunk is not big enough to handle the allocation the heap is extended, a new top chunk is created, and the old top chunk is freed *without consolidating* (the top chunk has PREV_INUSE set as adjacent chunks are merged into it).  
-
-<blockquote class='callout info' data-callout="info">
-
-<div class="callout-title">
-
-<div class="callout-icon"></div>
-<div class="callout-title-inner">
-<a href="https://github.com/shellphish/how2heap/blob/master/glibc_2.23/house_of_orange.c#L79">house of orange</a> uses this technique to start
-</div>
-</div>
-
-</blockquote>
+So, then, how can we prevent this consolidation?  We don't have enough control over the ordering of the heap chunks to prevent it from consolidating naturally -- but we do have a very strong write primitive.  Can the heap be corrupted in such a way so as to prevent consolidation? Keeping in mind that we have no control between the allocation and corresponding free?
 
 
+Well, there is an uncommon case where a call to malloc can free a chunk during operation -- whenever the top chunk is not big enough to handle the allocation the heap is extended, a new top chunk is created, and the old top chunk is freed.   
 
-By using our byte swap primitive to shrink the size of the top chunk (from 0x20550 to 0x550) and then making an allocation larger than the new top chunk size (which extends the heap) we end up with the old top chunk in an unsorted bin with two pointers to libc present. 
+There isn't really much on the heap to work with but the first place to look is the top chunk -- where our allocated chunk is split off from and then consolidated against.  
+
+```c
+// https://elixir.bootlin.com/glibc/glibc-2.35/source/malloc/malloc.c#L4353
+use_top:
+  /*
+	 If large enough, split off the chunk bordering the end of memory
+	 (held in av->top). Note that this is in accord with the best-fit
+	 search rule.  In effect, av->top is treated as larger (and thus
+	 less well fitting) than any other available chunk since it can
+	 be extended to be as large as necessary (up to system
+	 limitations).
+
+	 We require that av->top always exists (i.e., has size >=
+	 MINSIZE) after initialization, so if it would otherwise be
+	 exhausted by current request, it is replenished. (The main
+	 reason for ensuring it exists is that we may need MINSIZE space
+	 to put in fenceposts in sysmalloc.)
+   */
+
+  victim = av->top;
+  size = chunksize (victim);
+
+  if (__glibc_unlikely (size > av->system_mem))
+	malloc_printerr ("malloc(): corrupted top size");
+
+  if ((unsigned long) (size) >= (unsigned long) (nb + MINSIZE))
+	{
+	  remainder_size = size - nb;
+	  remainder = chunk_at_offset (victim, nb);
+	  av->top = remainder;
+	  set_head (victim, nb | PREV_INUSE |
+				(av != &main_arena ? NON_MAIN_ARENA : 0));
+	  set_head (remainder, remainder_size | PREV_INUSE);
+
+	  check_malloced_chunk (av, victim, nb);
+	  void *p = chunk2mem (victim);
+	  alloc_perturb (p, bytes);
+	  return p;
+	}
+
+  /* When we are using atomic ops to free fast chunks we can get
+	 here for all block sizes.  */
+  else if (atomic_load_relaxed (&av->have_fastchunks))
+	{
+	  malloc_consolidate (av);
+	  /* restore original bin index */
+	  if (in_smallbin_range (nb))
+		idx = smallbin_index (nb);
+	  else
+		idx = largebin_index (nb);
+	}
+
+  /*
+	 Otherwise, relay to handle system-dependent cases
+   */
+  else
+	{
+	  void *p = sysmalloc (nb, av);
+	  if (p != NULL)
+		alloc_perturb (p, bytes);
+	  return p;
+	}
+```
+
+There are two cases when allocating a chunk without pulling from the bins.  If the top chunk has sufficient size then a chunk is split off from the top chunk.  Otherwise, it will call into sysmalloc to handle "system-dependent cases". 
+
+Sysmalloc has a lot of weird alternate cases!  Allocations of sufficient size (sufficient size being a sliding scale, starts at 128k bytes and caps at 4mb on amd64 libc 2.35) are fulfilled with mmap.  If needed, it will attempt to use sbrk to extend the length of the heap.  The key to our problem lies in how malloc handles an edge case involving the heap extension -- new heap pages which are not not contiguous with the old heap (either because the address space is noncontiguous or because non-libc code called sbrk).  In such a case malloc will skip over that segment, create a new top chunk, and then *prevent consolidation and free the old top chunk*.  
+
+```c
+ /*
+	 If not the first time through, we either have a
+	 gap due to foreign sbrk or a non-contiguous region.  Insert a
+	 double fencepost at old_top to prevent consolidation with space
+	 we don't own. These fenceposts are artificial chunks that are
+	 marked as inuse and are in any case too small to use.  We need
+	 two to make sizes and alignments work out.
+   */
+
+  if (old_size != 0)
+	{
+	  /*
+		 Shrink old_top to insert fenceposts, keeping size a
+		 multiple of MALLOC_ALIGNMENT. We know there is at least
+		 enough space in old_top to do this.
+	   */
+	  old_size = (old_size - 2 * CHUNK_HDR_SZ) & ~MALLOC_ALIGN_MASK;
+	  set_head (old_top, old_size | PREV_INUSE);
+
+	  /*
+		 Note that the following assignments completely overwrite
+		 old_top when old_size was previously MINSIZE.  This is
+		 intentional. We need the fencepost, even if old_top otherwise gets
+		 lost.
+	   */
+set_head (chunk_at_offset (old_top, old_size),
+CHUNK_HDR_SZ | PREV_INUSE);
+set_head (chunk_at_offset (old_top,
+		 old_size + CHUNK_HDR_SZ),
+CHUNK_HDR_SZ | PREV_INUSE);
+
+	  /* If possible, release the rest. */
+	  if (old_size >= MINSIZE)
+		{
+		  _int_free (av, old_top, 1);
+		}
+	}
+```
+
+This is very promising, but we don't have the ability to actually call force sbrk to return a noncontiguous page right?  The answer is no -- but it's actually unnecessary! Contiguity is checked naively -- the old heap end is computed based off the top chunk + top chunk size. 
+
+```c
+// https://elixir.bootlin.com/glibc/glibc-2.35/source/malloc/malloc.c#L2606
+old_top = av->top;
+old_size = chunksize (old_top);
+old_end = (char *) (chunk_at_offset (old_top, old_size));
+// ...
+// https://elixir.bootlin.com/glibc/glibc-2.35/source/malloc/malloc.c#L2547
+if (brk == old_end && snd_brk == (char *) (MORECORE_FAILURE)) {
+// ...
+} else {
+// handles noncontiguous sbrk
+}
+```
+
+We don't need to force sbrk to return a noncontiguous page -- just convince malloc that it did do so.  By using our byte swap primitive to shrink the size of the top chunk (from 0x20550 to 0x550) and then making an allocation larger than the new top chunk size (which extends the heap) we end up with the old top chunk in an unsorted bin with two pointers to libc present. 
 
 ```python
 top_chunk = heap_base + 0x0ab8
@@ -331,7 +444,6 @@ unsorted_bin[idx=0, size=any, @0x7ffff7faacf0]: fd=0x555555564ab0, bk=0x55555556
  -> Chunk(addr=0x555555564ab0, size=0x530, flags=PREV_INUSE, fd=0x7ffff7faace0, bk=0x7ffff7faace0)
 [+] Found 1 valid chunks in unsorted bin.
 ```
-
 
 ```
 gef> scan heap libc

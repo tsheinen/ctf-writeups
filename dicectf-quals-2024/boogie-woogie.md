@@ -300,9 +300,6 @@ Unfortunately, in this case we don't have much ability to work with the heap in 
 
 So, then, how can we prevent this consolidation?  We don't have enough control over the ordering of the heap chunks to prevent it from consolidating naturally -- but we do have a very strong write primitive.  Can the heap be corrupted in such a way so as to prevent consolidation? Keeping in mind that we have no control between the allocation and corresponding free?
 
-
-Well, there is an uncommon case where a call to malloc can free a chunk during operation -- whenever the top chunk is not big enough to handle the allocation the heap is extended, a new top chunk is created, and the old top chunk is freed.   
-
 There isn't really much on the heap to work with but the first place to look is the top chunk -- where our allocated chunk is split off from and then consolidated against.  
 
 ```c

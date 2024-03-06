@@ -1,6 +1,6 @@
 name = "CSAW Finals CTF 2021"
 date = "2021-11-14"
-description = "I played CSAW finals with [idek](https://ctftime.org/team/157039); we placed 17th overall and 5th in the US. I mostly worked on rev (not a single solved pwn </3) which is a bit different than my usual but I certainly had a good time!"
+description = "I played CSAW finals with [idek](https://ctftime.org/team/157039); we placed 17th overall and 5th in the US. "
 
 [challenges]
 [challenges.glootie]
